@@ -66,22 +66,22 @@
         switch-to-workspace-10 = [ "<Super>0" ];
 
         # Moving WINDOW to the workspace 
-        move-to-workspace-1 = [ "<Shift><Super>1"];
-        move-to-workspace-2 = [ "<Shift><Super>2"];
-        move-to-workspace-3 = [ "<Shift><Super>3"];
-        move-to-workspace-4 = [ "<Shift><Super>4"];
-        move-to-workspace-5 = [ "<Shift><Super>5"];
-        move-to-workspace-6 = [ "<Shift><Super>6"];
-        move-to-workspace-7 = [ "<Shift><Super>7"];
-        move-to-workspace-8 = [ "<Shift><Super>8"];
-        move-to-workspace-9 = [ "<Shift><Super>9"];
-        move-to-workspace-10 = [ "<Shift><Super>0"];
+        move-to-workspace-1 = [ "<Shift><Super>1" ];
+        move-to-workspace-2 = [ "<Shift><Super>2" ];
+        move-to-workspace-3 = [ "<Shift><Super>3" ];
+        move-to-workspace-4 = [ "<Shift><Super>4" ];
+        move-to-workspace-5 = [ "<Shift><Super>5" ];
+        move-to-workspace-6 = [ "<Shift><Super>6" ];
+        move-to-workspace-7 = [ "<Shift><Super>7" ];
+        move-to-workspace-8 = [ "<Shift><Super>8" ];
+        move-to-workspace-9 = [ "<Shift><Super>9" ];
+        move-to-workspace-10 = [ "<Shift><Super>0" ];
 
         maximize = [ "<Super>F" ];
         close = [ "<Super>Q" ];
-        };
-        # Disable running apps from dock
-        "org/gnome/shell/keybindings" = {
+      };
+      # Disable running apps from dock
+      "org/gnome/shell/keybindings" = {
         switch-to-application-1 = [ " " ];
         switch-to-application-2 = [ " " ];
         switch-to-application-3 = [ " " ];
@@ -104,6 +104,61 @@
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
     enableCompletion = true;
+    initExtra = ''
+      autoload -U colors && colors  # Load colors
+      export PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+      setopt autocd
+      HISTSIZE=10000000
+      SAVEHIST=10000000
+      HISTFILE="$HOME/.zsh_history"
+      setopt share_history
+      setopt inc_append_history
+      # Basic auto/tab complete:
+      autoload -U compinit
+      zstyle ':completion:*' menu select
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+      zmodload zsh/complist
+      compinit
+      _comp_options+=(globdots)# Include hidden files.
+      autoload -U zsh-autosuggestions
+      # zmodload zsh/autosuggestions
+      # vi mode
+      bindkey -v
+      export KEYTIMEOUT=1
+
+      # Use vim keys in tab complete menu:
+      bindkey -M menuselect 'h' vi-backward-char
+      bindkey -M menuselect 'k' vi-up-line-or-history
+      bindkey -M menuselect 'l' vi-forward-char
+      bindkey -M menuselect 'j' vi-down-line-or-history
+      bindkey -v '^?' backward-delete-char
+
+      # Change cursor shape for different vi modes.
+      function zle-keymap-select () {
+          case $KEYMAP in
+              vicmd) echo -ne '\e[1 q';;      # block
+              viins|main) echo -ne '\e[5 q';; # beam
+          esac
+      }
+      zle -N zle-keymap-select
+      zle-line-init() {
+          zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+          echo -ne "\e[5 q"
+      }
+      zle -N zle-line-init
+      echo -ne '\e[5 q' # Use beam shape cursor on startup.
+      preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+
+      # Edit line in vim with ctrl-e:
+      autoload edit-command-line; zle -N edit-command-line
+      bindkey '^e' edit-command-line
+      bindkey -M vicmd '^[[P' vi-delete-char
+      bindkey -M vicmd '^e' edit-command-line
+      bindkey -M visual '^[[P' vi-delete
+
+
+    '';
     shellAliases = {
       n = "nvim";
       b = "btop";
@@ -124,6 +179,22 @@
       zshupdate = "source ~/.zshrc";
       nixupdate = "sudo nixos-rebuild switch --flake ~/nixconf#nixos";
 
+    };
+  };
+
+  programs.alacritty = {
+  enable = true; 
+  settings = {
+      font = {
+        normal = {
+         family = "JetBrainsMono Nerd Font";
+         style = "Regular";
+      };
+        size = 16;
+      };
+      window = {
+        opacity = 0.75;
+      };
     };
   };
 

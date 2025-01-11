@@ -18,6 +18,7 @@
     sysstat
     lm_sensors # for `sensors` command
     ethtool
+    lshw
     pciutils # lspci
     usbutils # lsusb 
     zbar
@@ -236,7 +237,22 @@
 
       ";
   };
+  
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = "gruvbox_dark_v2";
+      theme_background = "true";
+    };
+  };
 
+  programs.yazi = {
+    enable = true;
+    settings = {
+      theme = "gruvbox";
+    };
+  };
+  
   programs.git = {
     enable = true;
     userName = "jawor182";

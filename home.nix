@@ -19,7 +19,9 @@
     lm_sensors # for `sensors` command
     ethtool
     pciutils # lspci
-    usbutils # lsusb
+    usbutils # lsusb 
+    zbar
+    # Gnome extensions
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
     gnomeExtensions.gsconnect
@@ -156,8 +158,6 @@
       bindkey -M vicmd '^[[P' vi-delete-char
       bindkey -M vicmd '^e' edit-command-line
       bindkey -M visual '^[[P' vi-delete
-
-
     '';
     shellAliases = {
       n = "nvim";
@@ -178,24 +178,63 @@
       zb = "zbarimg";
       zshupdate = "source ~/.zshrc";
       nixupdate = "sudo nixos-rebuild switch --flake ~/nixconf#nixos";
+      # hms = "home-manager -f ~/nixconf/home.nix switch --flake ~/nixconf#nixos";
 
     };
   };
 
   programs.alacritty = {
-  enable = true; 
-  settings = {
+    enable = true;
+    settings = {
       font = {
         normal = {
-         family = "JetBrainsMono Nerd Font";
-         style = "Regular";
-      };
+          family = "JetBrainsMono Nerd Font";
+          style = "Regular";
+        };
         size = 16;
       };
       window = {
         opacity = 0.75;
       };
     };
+  };
+
+  programs.tmux = {
+    enable = true;
+    mouse = true;
+    terminal = "screen-256color";
+    sensibleOnTop = true;
+    clock24 = true;
+    keyMode = "vi";
+    prefix = "C-s";
+    plugins = with pkgs; [
+      {
+        plugin = tmuxPlugins.yank;
+      }
+      {
+        plugin = tmuxPlugins.vim-tmux-navigator;
+      }
+      {
+        plugin = tmuxPlugins.gruvbox;
+        extraConfig = "set -g @tmux-gruvbox 'dark'";
+      }
+
+    ];
+    extraConfig = "
+      set -g base-index 1
+      set -g pane-base-index 1
+      set-window-option -g pane-base-index 1
+      set-option -g renumber-windows on
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      bind 'v' split-window -v -c '#{pane_current_path}'
+      bind 'h' split-window -h -c '#{pane_current_path}'
+      bind C-l send-keys 'C-l'
+      bind -n M-H previous-window
+      bind -n M-L next-window
+
+      ";
   };
 
   programs.git = {

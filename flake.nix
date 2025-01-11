@@ -1,5 +1,5 @@
 {
-  description = "A simple NixOS flake";
+  description = "A NixOS flake";
 
   inputs = {
     # NixOS official package source, using the nixos-24.11 branch here
@@ -29,7 +29,6 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            # TODO replace ryan with your own username
             home-manager.users.jawor = import ./home.nix;
 
             # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix

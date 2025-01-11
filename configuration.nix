@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -48,35 +49,35 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome = {
-      enable = true;
-      extraGSettingsOverridePackages = [ pkgs.mutter ];
-      extraGSettingsOverrides = ''
-        [org.gnome.mutter]
-        experimental-features=['scale-monitor-framebuffer']
-      '';
-    };
+    enable = true;
+    extraGSettingsOverridePackages = [ pkgs.mutter ];
+    extraGSettingsOverrides = ''
+      [org.gnome.mutter]
+      experimental-features=['scale-monitor-framebuffer']
+    '';
+  };
 
   environment.gnome.excludePackages = with pkgs; [
-  evince
-  epiphany 
-  geary 
-  gnome-tour
-  gnome-user-docs
-  gnome-characters
-  gnome-contacts
-  gnome-font-viewer
-	gnome-maps
-	gnome-weather
-	gnome-music
-	gnome-connections
-	simple-scan
-	gnome-software
-	simple-scan
-	snapshot
-	totem
-  yelp
+    evince
+    epiphany
+    geary
+    gnome-tour
+    gnome-user-docs
+    gnome-characters
+    gnome-contacts
+    gnome-font-viewer
+    gnome-maps
+    gnome-weather
+    gnome-music
+    gnome-connections
+    simple-scan
+    gnome-software
+    simple-scan
+    snapshot
+    totem
+    yelp
   ];
-	
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "pl";
@@ -116,9 +117,9 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
 
-        ];
+    ];
   };
- 
+
   security.sudo = {
     enable = true;
     extraConfig = ''
@@ -135,59 +136,62 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   environment.systemPackages = with pkgs; [
-     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-     neovim
-     git
-     stow
-     zsh
-     fish
-     starship 
-     gnome-tweaks
-     thunderbird
-     ghostty
-     alacritty
-     brave
-     obsidian
-     discord
-     spotify
-     keepassxc
-     vscode
-     gh
-     syncthing
-     htop
-     btop
-     nerd-fonts.jetbrains-mono
-     fzf
-     tmux
-     bat
-     yazi
-     zsh-syntax-highlighting
-     zsh-autosuggestions
-     zsh-completions
-     gcc
-     clang
-     nodejs
-     pnpm
-     deno
-     yarn
-     ruby
-     php
-     python3
-     go
-     lua
-     neofetch
-     fastfetch
-     rustup
-     cargo
-     unzip
-     xclip
-     wl-clipboard
-     dconf-editor
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    neovim
+    git
+    stow
+    zsh
+    fish
+    starship
+    gnome-tweaks
+    thunderbird
+    ghostty
+    alacritty
+    brave
+    obsidian
+    discord
+    spotify
+    keepassxc
+    vscode
+    gh
+    syncthing
+    htop
+    btop
+    nerd-fonts.jetbrains-mono
+    fzf
+    tmux
+    bat
+    yazi
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-completions
+    gcc
+    clang
+    nodejs
+    pnpm
+    deno
+    yarn
+    ruby
+    php
+    python3
+    go
+    lua
+    neofetch
+    fastfetch
+    rustup
+    cargo
+    unzip
+    xclip
+    wl-clipboard
+    dconf-editor
+    home-manager
+    cava
 
-		 pkgs.gnomeExtensions.dash-to-dock
-		 pkgs.gnomeExtensions.blur-my-shell
-     
-     
+
+    pkgs.gnomeExtensions.dash-to-dock
+    pkgs.gnomeExtensions.blur-my-shell
+
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -22,6 +22,7 @@
     pciutils # lspci
     usbutils # lsusb 
     zbar
+    tree
     # Gnome extensions
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
@@ -177,6 +178,7 @@
       gad = "git add";
       lshw = "sudo lshw";
       zb = "zbarimg";
+      SS = "sudo systemctl";
       zshupdate = "source ~/.zshrc";
       nixupdate = "sudo nixos-rebuild switch --flake ~/nixconf#nixos";
       # hms = "home-manager -f ~/nixconf/home.nix switch --flake ~/nixconf#nixos";
@@ -237,7 +239,7 @@
 
       ";
   };
-  
+
   programs.btop = {
     enable = true;
     settings = {
@@ -248,11 +250,16 @@
 
   programs.yazi = {
     enable = true;
+    enableZshIntegration = true;
+    # flavors = {
+    #   dark = "package.gruvbox-dark";
+    # };
     settings = {
-      theme = "gruvbox";
+      manager = {
+        show_hidden = true;
+      };
     };
   };
-  
   programs.git = {
     enable = true;
     userName = "jawor182";

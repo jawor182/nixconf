@@ -23,6 +23,7 @@
     usbutils # lsusb 
     zbar
     tree
+    tlp
     # Gnome extensions
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell

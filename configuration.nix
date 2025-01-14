@@ -27,20 +27,20 @@
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
   services.avahi.nssmdns6 = true;
-  services.power-profiles-daemon.enable = false;
+  services.power-profiles-daemon.enable = true;
   services.tlp = {
-    enable = true;
+    enable = false;
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balanced";
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
       CPU_MIN_PERF_ON_AC = 0;
       CPU_MAX_PERF_ON_AC = 100;
       CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 50;
+      CPU_MAX_PERF_ON_BAT = 100;
       START_CHARGE_THRESH_BAT0 = 20;
       STOP_CHARGE_THRESH_BAT0 = 80;
       START_CHARGE_THRESH_BAT1 = 20;

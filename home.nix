@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
 
     zip
+    cava
     xz
     unzip
     p7zip
@@ -28,6 +29,7 @@
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
     gnomeExtensions.gsconnect
+    gnomeExtensions.thinkpad-battery-threshold
   ];
 
   dconf = {
@@ -39,12 +41,19 @@
           pkgs.gnomeExtensions.blur-my-shell.extensionUuid
           pkgs.gnomeExtensions.dash-to-dock.extensionUuid
           pkgs.gnomeExtensions.gsconnect.extensionUuid
+          pkgs.gnomeExtensions.thinkpad-battery-threshold.extensionUuid
         ];
       };
       # Extensions 
       "org/gnome/shell/extensions/blur-my-shell" = {
         brightness = 1;
         noise-amount = 0;
+      };
+      "org/gnome/shell/extensions/thinkpad-battery-threshold" = {
+        start-bat0 = 50;
+        end-bat0 = 75;
+        start-bat1 = 50;
+        end-bat1 = 90;
       };
       "org/gnome/shell/extensions/dash-to-dock" = {
         # Add settings for dash-to-dock if needed

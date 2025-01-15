@@ -207,6 +207,7 @@
       SS = "sudo systemctl";
       zshupdate = "source ~/.zshrc";
       nixupdate = "sudo nixos-rebuild switch --flake ~/nixconf#nixos";
+      ff = "fastfetch";
       # hms = "home-manager -f ~/nixconf/home.nix switch --flake ~/nixconf#nixos";
 
     };

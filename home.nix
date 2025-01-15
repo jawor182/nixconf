@@ -25,6 +25,8 @@
     zbar
     tree
     tlp
+    zathura
+    catppuccin
     # Gnome extensions
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
@@ -112,7 +114,21 @@
       };
     };
   };
+  catppuccin = {
+    # enable = true;
+    flavor = "mocha";
+    yazi.enable = true;
+    bat.enable = true;
+    btop.enable = true;
+    fzf.enable = true;
+    cava.enable = true;
+    cava.transparent = true;
+    ghostty.enable = true;
+    alacritty.enable = true;
+    zathura.enable = true;
+    zsh-syntax-highlighting.enable = true;
 
+  };
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
@@ -253,7 +269,7 @@
   programs.btop = {
     enable = true;
     settings = {
-      color_theme = "gruvbox_dark_v2";
+      # color_theme = "gruvbox_dark_v2";
       theme_background = "true";
     };
   };

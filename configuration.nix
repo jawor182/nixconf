@@ -214,6 +214,7 @@
     networkmanager
     networkmanagerapplet
     todoist-electron
+    catppuccin
 
 
     # home-manager

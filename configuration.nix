@@ -192,6 +192,7 @@
     zsh-autosuggestions
     zsh-completions
     gcc
+    ntfs3g
     clang
     nodejs
     pnpm

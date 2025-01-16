@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
 
     zip
+    pulsemixer
     acpi
     cava
     xz

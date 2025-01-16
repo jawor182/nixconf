@@ -6,6 +6,7 @@
   home.packages = with pkgs; [
 
     zip
+    acpi
     cava
     xz
     unzip
@@ -27,11 +28,12 @@
     tlp
     zathura
     catppuccin
+    powertop
     # Gnome extensions
     gnomeExtensions.dash-to-dock
     gnomeExtensions.blur-my-shell
     gnomeExtensions.gsconnect
-    gnomeExtensions.thinkpad-battery-threshold
+    # gnomeExtensions.thinkpad-battery-threshold
   ];
 
   dconf = {
@@ -43,7 +45,7 @@
           pkgs.gnomeExtensions.blur-my-shell.extensionUuid
           pkgs.gnomeExtensions.dash-to-dock.extensionUuid
           pkgs.gnomeExtensions.gsconnect.extensionUuid
-          pkgs.gnomeExtensions.thinkpad-battery-threshold.extensionUuid
+          # pkgs.gnomeExtensions.thinkpad-battery-threshold.extensionUuid
         ];
       };
       # Extensions 
@@ -51,12 +53,12 @@
         brightness = 1;
         noise-amount = 0;
       };
-      "org/gnome/shell/extensions/thinkpad-battery-threshold" = {
-        start-bat0 = 50;
-        end-bat0 = 75;
-        start-bat1 = 50;
-        end-bat1 = 90;
-      };
+      # "org/gnome/shell/extensions/thinkpad-battery-threshold" = {
+      #   start-bat0 = 50;
+      #   end-bat0 = 75;
+      #   start-bat1 = 50;
+      #   end-bat1 = 90;
+      # };
       "org/gnome/shell/extensions/dash-to-dock" = {
         # Add settings for dash-to-dock if needed
         running-indicator-style = "DOTS";
@@ -197,6 +199,7 @@
       ls = "ls --color";
       la = "ls -la";
       ll = "ls -l";
+      lah = "ls -lah";
       rm = "rm -rf";
       gst = "git status";
       gcm = "git commit -m";

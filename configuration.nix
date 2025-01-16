@@ -27,6 +27,7 @@
   services.avahi.enable = true;
   services.avahi.nssmdns4 = true;
   services.avahi.nssmdns6 = true;
+  # Power management
   services.power-profiles-daemon.enable = true;
   services.tlp = {
     enable = false;
@@ -34,7 +35,7 @@
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "balanced";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "performence";
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
       CPU_MIN_PERF_ON_AC = 0;
@@ -215,6 +216,7 @@
     networkmanagerapplet
     todoist-electron
     catppuccin
+    mission-center
     # home-manager
     cava
 

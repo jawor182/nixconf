@@ -87,6 +87,7 @@
     evince
     epiphany
     geary
+    loupe
     gnome-tour
     gnome-user-docs
     gnome-characters

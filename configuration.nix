@@ -102,8 +102,14 @@
     snapshot
     totem
     yelp
+    file-roller
+    gnome-clocks
+    seahorse
+    gnome-calendar
+    gnome-system-monitor
+    eog
   ];
-
+  
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "pl";
@@ -160,7 +166,7 @@
   # services.syncthing = {
   #   enable = true;
   # };
-
+  services.xserver.excludePackages = [ pkgs.xterm ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

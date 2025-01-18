@@ -28,9 +28,9 @@
   services.avahi.nssmdns4 = true;
   services.avahi.nssmdns6 = true;
   # Power management
-  services.power-profiles-daemon.enable = true;
+  services.power-profiles-daemon.enable = false;
   services.tlp = {
-    enable = false;
+    enable = true;
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -44,8 +44,8 @@
       CPU_MAX_PERF_ON_BAT = 100;
       START_CHARGE_THRESH_BAT0 = 20;
       STOP_CHARGE_THRESH_BAT0 = 80;
-      START_CHARGE_THRESH_BAT1 = 20;
-      STOP_CHARGE_THRESH_BAT1 = 90;
+      START_CHARGE_THRESH_BAT1 = 50;
+      STOP_CHARGE_THRESH_BAT1 = 80;
 
     };
   };
@@ -156,13 +156,19 @@
   programs.zsh.enable = true;
 
   nixpkgs.config.allowUnfree = true;
+  # Services 
+  # services.syncthing = {
+  #   enable = true;
+  # };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
+  
+  # System packages
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim 
+    firefox
     neovim
     git
     stow

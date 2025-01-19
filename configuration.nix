@@ -10,6 +10,8 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+  
+  boot.kernelPackages = pkgs.linuxPackages_testing;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -35,7 +37,7 @@
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "performence";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
       CPU_MIN_PERF_ON_AC = 0;
@@ -110,7 +112,7 @@
     gnome-system-monitor
     eog
   ];
-  
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "pl";
@@ -149,7 +151,8 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
-
+      # flatpak
+      # gnome-software
     ];
   };
 
@@ -171,10 +174,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  
+
   # System packages
   environment.systemPackages = with pkgs; [
-    vim 
+    vim
     firefox
     neovim
     git
@@ -233,6 +236,7 @@
     mission-center
     # home-manager
     cava
+    # linuxKernel.kernels.linux_testing
 
 
     pkgs.gnomeExtensions.dash-to-dock
@@ -240,7 +244,9 @@
 
 
   ];
-
+  
+  # Kernel
+  # boot.kernelPackages = pkgs.linuxKernel.kernels.linux_testing;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -250,11 +256,18 @@
   # };
 
   # List services that you want to enable:
-
+  # services.flatpak.enable = true;
+  # systemd.services.flatpak-repo = {
+  #   wantedBy = [ "multi-user.target" ];
+  #   path = [ pkgs.flatpak ];
+  #   script = ''
+  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  #   '';
+  # };
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
   # ENVS
-  # environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

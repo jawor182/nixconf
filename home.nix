@@ -76,6 +76,9 @@
           brightness = 1;
           noise-amount = 0;
         };
+        "org/gnome/shell/extensions/caffeine" = {
+          show-notifications = false;
+        };
         #   "org/gnome/shell/extensions/thinkpad-battery-threshold" = {
         #   start-bat0 = 50;
         #   end-bat0 = 100;
@@ -279,7 +282,7 @@
         zb = "zbarimg";
         SS = "sudo systemctl";
         zshupdate = "source ~/.zshrc";
-        nixupdate = "sudo nixos-rebuild switch --flake ~/nixconf#nixos";
+        nixupdate = "sudo nixos-rebuild switch --flake ~/nixconf#nixos && sudo nix flake update";
         ff = "fastfetch";
         # hms = "home-manager -f ~/nixconf/home.nix switch --flake ~/nixconf#nixos";
 

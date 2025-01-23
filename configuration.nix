@@ -185,6 +185,9 @@
     firefox
     neovim
     git
+    ifuse
+    libimobiledevice
+    usbmuxd
     stow
     zsh
     fish
@@ -260,6 +263,9 @@
   # };
 
   # List services that you want to enable:
+  services.usbmuxd = {
+    enable = true;
+  };
   # services.flatpak.enable = true;
   # systemd.services.flatpak-repo = {
   #   wantedBy = [ "multi-user.target" ];

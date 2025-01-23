@@ -39,9 +39,9 @@
     enable = true;
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_SCALING_GOVERNOR_ON_BAT = "performance";
 
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "performance";
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
       CPU_MIN_PERF_ON_AC = 0;
@@ -104,7 +104,7 @@
     gnome-music
     gnome-connections
     simple-scan
-    gnome-software
+    # gnome-software
     simple-scan
     snapshot
     totem
@@ -155,8 +155,8 @@
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
     packages = with pkgs; [
-      # flatpak
-      # gnome-software
+      flatpak
+      gnome-software
     ];
   };
 
@@ -187,6 +187,7 @@
     git
     ifuse
     libimobiledevice
+    usbmuxd2
     usbmuxd
     stow
     zsh
@@ -266,14 +267,14 @@
   services.usbmuxd = {
     enable = true;
   };
-  # services.flatpak.enable = true;
-  # systemd.services.flatpak-repo = {
-  #   wantedBy = [ "multi-user.target" ];
-  #   path = [ pkgs.flatpak ];
-  #   script = ''
-  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  #   '';
-  # };
+  services.flatpak.enable = true;
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
   # ENVS
